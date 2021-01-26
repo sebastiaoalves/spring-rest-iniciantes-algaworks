@@ -8,20 +8,20 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.uern.di.poo.OrdemDeServicosApplication;
 import br.uern.di.poo.api.model.OrdemServicoInput;
 import br.uern.di.poo.api.model.OrdemServicoModel;
-import br.uern.di.poo.domain.model.Cliente;
 import br.uern.di.poo.domain.model.OrdemServico;
 import br.uern.di.poo.domain.repository.OrdemServicoRepository;
 import br.uern.di.poo.domain.service.GestaoOrdemServicoService;
@@ -60,6 +60,12 @@ public class OrdemServicoController {
 			return ResponseEntity.ok(ordemServicoModel);
 		}else
 			return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping("{ordemServicoId}/finalizacao")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void finalizar(@PathVariable Long ordemServicoId) {
+		gestaoOrdemServico.finalizar(ordemServicoId);
 	}
 	
 	private OrdemServicoModel toModel(OrdemServico ordemServico) {

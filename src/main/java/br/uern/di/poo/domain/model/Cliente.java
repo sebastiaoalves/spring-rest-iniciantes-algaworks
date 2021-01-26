@@ -14,7 +14,9 @@ import br.uern.di.poo.domain.validation.ValidationGroups;
 @Entity
 public class Cliente {
 	
-	@NotNull (groups = ValidationGroups.ClienteId.class)
+	// TODO: Validações no representation model, igual a classe Ordem de serviço
+	
+	// @NotNull (groups = ValidationGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)  //Pesquisar o significado	
 	private Long id;
